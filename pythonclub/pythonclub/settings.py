@@ -76,13 +76,12 @@ WSGI_APPLICATION = 'pythonclub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pythonclubdb',
         'USER' : 'postgres',
         'PASSWORD': 'P@ssw0rd1',
         'HOST' :'localhost',
-'PORT' :'',
+        'PORT' :'',
     }
 }
 
