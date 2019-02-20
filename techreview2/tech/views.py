@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import ProductType, Product
+from .forms import ProductForm
 
 # Create your views here.
 def index (request):
@@ -17,3 +18,15 @@ def productdetails (request, id):
     detail=get_objects_or_404(Product, pk=id)
     context = { 'detail': detail}
     return render (request, 'tech/details.html', context=context)
+#form view
+def newProduct(request):
+    form=ProductForm
+    if request.method=='POST':
+        form=ProductForm(request.POST)
+        if form.is_valid():
+            post=form.save(commit=True)
+            post.save()
+            form=ProductForm()
+    else: 
+        form=ProductForm()
+    return render(request, 'tech/newproduct.html', {'form': form})

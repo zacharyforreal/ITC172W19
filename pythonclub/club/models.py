@@ -12,7 +12,7 @@ class Meeting(models.Model):
     Agenda=models.URLField(null=True, blank=True)
 
     def __str__(self):
-        return self.meetingtitile
+        return self.meetingtitle
     
     class Meta:
         db_table='meeting'
