@@ -13,21 +13,21 @@ class MeetingTest(TestCase):
     def test_tablename(self):
         self.assertEqual(str(Meeting._meta.db_table), 'meeting')
 
-class ProductTypeTest(TestCase):
+class MeetingDateTest(TestCase):
     def test_stringOutput(self):
-        techtype=ProductType(typename='Meeting')
-        self.assertEqual(str(techtype), techtype.typename)
+        meetingday=MeetingDate(meetingtime='Meeting')
+        self.assertEqual(str(meetingday), meetingday.meetingtime)
 
     def test_tablename(self):
-        self.assertEqual(str(TechType._meta.db_table), 'producttype')
+        self.assertEqual(str(TechType._meta.db_table), 'meetingdate')
 
-class ReviewTest(TestCase):
+class ResourceTest(TestCase):
     def test_stringOutput(self):
-        review=Review(reviewtitle='March Meeting')
-        self.assertEqual(str(review), review.reviewtitle)
+        resource=Resource(reviewtitle='March Meeting')
+        self.assertEqual(str(resource), resource.reviewtitle)
 
     def test_tablename(self):
-self.assertEqual(str(Review._meta.db_table), 'review')
+self.assertEqual(str(Resource._meta.db_table), 'resource')
 
 #testing a view
 class TestIndex(TestCase):
@@ -40,30 +40,30 @@ class TestIndex(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'club/index.html')
 
-class TestGetProduct(TestCase):
+class TestGetMeeting(TestCase):
 
 
     def test_view_url_exists_at_desired_location(self):
-        response = self.client.get('/tech/products')
+        response = self.client.get('/club/meetings')
         self.assertEqual(response.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        response = self.client.get(reverse('getproducts'))
+        response = self.client.get(reverse('getmeetings'))
         self.assertEqual(response.status_code, 200)
         
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('getproducts'))
+        response = self.client.get(reverse('getmeetings'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'reviews/products.html')
+        self.assertTemplateUsed(response, 'reviews/meetings.html')
 
 class New_Product_Form_Test(TestCase):
 
     # Valid Form Data
-    def test_productForm_is_valid(self):
-        form = ProductForm(data={'productname': "Surface", 'techtype': "laptop", 'user': "steve", 'entrydate': "2018-12-17", 'productURL':"http:microsoft.com", 'productdescription':"lightweight laptop" })
+    def test_meetingForm_is_valid(self):
+        form = MeetingForm(data={'meetingtitle': "Music study", 'meetingday': "15th", 'user': "zack", 'entrydate': "2018-12-17", 'meetingURL':"http:microsoft.com", 'meetingdescription':"lightweight laptop" })
         self.assertTrue(form.is_valid())
 
     # Invalid Form Data
     def test_UserForm_invalid(self):
-        form = ProductForm(data={'productname': "Surface", 'techtype': "laptop", 'user': "steve", 'entrydate': "2018-12-17", 'productURL':"http:microsoft.com", 'productdescription':"lightweight laptop" })
+        form = ProductForm(data={'meetingtitle': "Music study", 'meetingday': "15th", 'user': "zack", 'entrydate': "2018-12-17", 'meetingURL':"http:microsoft.com", 'meetingdescription':"lightweight laptop" })
 self.assertFalse(form.is_valid())
