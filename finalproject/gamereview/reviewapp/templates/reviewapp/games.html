@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--This is a comment-->
+
+<h2>Games</h2>
+<table class='table'>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+    </tr>
+    {% for item in game_list   %}
+        <tr>
+            <td><a href="{% url 'details' id=item.id %}">{{ item.gamename }}</a></td>
+            <td>{{ item.gametype }}</td>
+        </tr>
+    
+    {% endfor %}
+
+</table>
+
+{% endblock %}
